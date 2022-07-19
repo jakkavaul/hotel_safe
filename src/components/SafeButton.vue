@@ -1,6 +1,6 @@
 <template>
-  <div class="safe-button">
-    <p>{{ value }}</p>
+  <div class="safe-button" @click="onClick">
+    <p>{{ display }}</p>
   </div>
 </template>
 
@@ -9,12 +9,18 @@ export default {
   name: 'SafeButton',
   props: {
     value: String,
+    display: String,
     fontSize: {
       type: String,
       default: '16px',
     }
   },
-  computed : {
+  methods: {
+    onClick: function () {
+      this.$emit('safeButtonPressed', this.value);
+    },
+  },
+  computed: {
     cssProps() {
       return {
         '--btn-font-size': this.fontSize,
@@ -30,6 +36,7 @@ export default {
     vertical-align: middle;
     font-weight: bold;
     font-size: var(--btn-font-size);
+    cursor: pointer;
   }
 
   .safe-button:active {

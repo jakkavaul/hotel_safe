@@ -1,21 +1,28 @@
 <template>
   <div class="safe-screen">
+    <p>{{ display }}</p>
   </div>
 </template>
 
 <script>
 export default {
   name: 'SafeScreen',
+  data() {
+    return {
+      display: "****",
+    }
+  },
+  methods: {
+    update(value) {
+      this.display = value;
+    }
+  }
 }
 </script>
 
 <style scoped>
   .safe-screen {
     background-color: #9EA18B;
-    vertical-align: middle;
-    font-weight: bold;
-    font-size: 50px;
-    color: #35f00f;
     width: 565px;
     height: 112px;
     border: 8px solid #080202;
@@ -24,5 +31,14 @@ export default {
     -webkit-box-shadow: inset 0px 0px 10px 0px #444444;
      -moz-box-shadow: inset 0px 0px 10px 0px #444444;
           box-shadow: inset 0px 0px 10px 0px #444444;
+  }
+
+  .safe-screen p {
+    font-weight: bold;
+    color: #333;
+    font-size: 200px;
+    margin-top: -20px;
+    margin-left: 20px;
+    letter-spacing: 40px;
   }
 </style>

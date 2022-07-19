@@ -2,7 +2,7 @@
   <div class="hotel-safe">
     <div class="safe-body">
       <div class="column">
-        <NumPad />
+        <NumPad @safe-button-pressed="onSafeButtonPressed"/>
       </div>
       <div class="column">
         <div class="row screen-row">
@@ -22,27 +22,41 @@ import SafeScreen from './SafeScreen.vue';
 import SafeLight from './SafeLight.vue';
 
 export default {
-    name: "HotelSafe",
-    components: {
-      NumPad,
-      SafeScreen,
-      SafeLight
-    },
-    data() {
-      return {
-        locked: {
-          type: Boolean,
-          default: false,
-        }
-      }
+  name: "HotelSafe",
+  components: {
+    NumPad,
+    SafeScreen,
+    SafeLight
+  },
+  data() {
+    return {
+      locked: false,
+      pin: "",
+      numDigits: 0,
     }
+  },
+  methods: {
+    onSafeButtonPressed: function (value) {
+      if (!this.locked) {
+
+        if (!this.locked && this.numDigits < 4) {
+          this.numDigits++;
+          console.log(value, this.numDigits);
+          this.pin += value;
+        } else {
+          console.log(this.pin);
+        }
+      } else {
+        console.log('locked!');
+      }
+    },
+  },
 }
 </script>
 
 <style scoped>
-
 .column {
-  float :left;
+  float: left;
   width: 50%;
 }
 
@@ -62,7 +76,7 @@ export default {
 
 .safe-body {
   width: 1230px;
-  height: 305px;  
+  height: 305px;
   background-color: #293F55;
   border: 10px solid #FFF;
 }
