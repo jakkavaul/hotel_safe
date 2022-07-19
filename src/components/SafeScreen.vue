@@ -9,36 +9,36 @@ export default {
   name: 'SafeScreen',
   data() {
     return {
-      display: "****",
+      display: "",
     }
   },
   methods: {
     update(value) {
       this.display = value;
     }
-  }
+  },
 }
 </script>
 
 <style scoped>
-  .safe-screen {
-    background-color: #9EA18B;
-    width: 565px;
-    height: 112px;
-    border: 8px solid #080202;
-    border-radius: 25px;
-
-    -webkit-box-shadow: inset 0px 0px 10px 0px #444444;
-     -moz-box-shadow: inset 0px 0px 10px 0px #444444;
-          box-shadow: inset 0px 0px 10px 0px #444444;
-  }
-
-  .safe-screen p {
-    font-weight: bold;
-    color: #333;
-    font-size: 200px;
-    margin-top: -20px;
-    margin-left: 20px;
-    letter-spacing: 40px;
+  .safe-screen {    background-color: #9EA18B;
+      width: 565px;
+      height: 112px;
+      border: 8px solid #080202;
+      border-radius: 25px;
+    
+      -webkit-box-shadow: inset 0px 0px 10px 0px #444444;
+      -moz-box-shadow: inset 0px 0px 10px 0px #444444;
+      box-shadow: inset 0px 0px 10px 0px #444444;
+    }
+    
+    .safe-screen p {
+      text-align: left;
+      font-weight: bold;
+      color: #333;
+      font-size: 110px;
+      margin-top: 0;
+      margin-left: 100px;
+      letter-spacing: 40px;
   }
 </style>

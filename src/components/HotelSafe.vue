@@ -6,7 +6,7 @@
       </div>
       <div class="column">
         <div class="row screen-row">
-          <SafeScreen />
+          <SafeScreen ref="SafeScreen"/>
         </div>
         <div class="row light-row">
           <SafeLight />
@@ -37,12 +37,17 @@ export default {
   },
   methods: {
     onSafeButtonPressed: function (value) {
-      if (!this.locked) {
+      if (value === 'clear') {
+          this.numDigits = 0;
+          this.pin = "";
+          this.$refs.SafeScreen.update(this.pin);
+      } else if (!this.locked) {
 
-        if (!this.locked && this.numDigits < 4) {
+        if (this.numDigits < 4) {
           this.numDigits++;
           console.log(value, this.numDigits);
           this.pin += value;
+          this.$refs.SafeScreen.update(this.pin);
         } else {
           console.log(this.pin);
         }
