@@ -33,12 +33,10 @@ export default {
     }
     
     .safe-screen p {
-      text-align: left;
       font-weight: bold;
       color: #333;
-      font-size: 110px;
+      font-size: 90px;
       margin-top: 0;
-      margin-left: 100px;
-      letter-spacing: 40px;
+      letter-spacing: 20px;
   }
 </style>

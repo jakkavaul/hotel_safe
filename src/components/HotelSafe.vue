@@ -31,28 +31,40 @@ export default {
   data() {
     return {
       locked: false,
-      pin: "",
-      numDigits: 0,
+      enteredPin: "",
+      actualPin: "",
     }
   },
   methods: {
     onSafeButtonPressed: function (value) {
-      if (value === 'clear') {
-          this.numDigits = 0;
-          this.pin = "";
-          this.$refs.SafeScreen.update(this.pin);
-      } else if (!this.locked) {
 
-        if (this.numDigits < 4) {
-          this.numDigits++;
-          console.log(value, this.numDigits);
-          this.pin += value;
-          this.$refs.SafeScreen.update(this.pin);
-        } else {
-          console.log(this.pin);
-        }
+      if (value === 'clear') {
+        this.enteredPin = "";
+        this.$refs.SafeScreen.update("");
+        return;
+      }
+
+      if (this.enteredPin.length < 4) {
+          this.enteredPin += value;
+          this.$refs.SafeScreen.update(this.enteredPin);
       } else {
-        console.log('locked!');
+        if (value === 'enter') {
+          this.$refs.SafeScreen.update("");
+          if (this.locked) {
+            if (this.enteredPin == this.actualPin) {
+              this.locked = false;
+              console.log('unlocked!');
+            } else {
+              this.$refs.SafeScreen.update("INVALID");
+            }
+          } else {
+            this.actualPin = this.enteredPin;
+            this.locked = true;
+            console.log('pin changed!');
+          } 
+
+          this.enteredPin = "";
+        }
       }
     },
   },

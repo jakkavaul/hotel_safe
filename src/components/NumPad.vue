@@ -22,7 +22,7 @@ export default {
       buttons: [
         { key: 0, value: '1', display: '1' },
         { key: 1, value: '2', display: '2' },
-        { key: 2, value: '4', display: '4' },
+        { key: 2, value: '3', display: '3' },
         { key: 3, value: '4', display: '4' },
         { key: 4, value: '5', display: '5' },
         { key: 5, value: '6', display: '6' },
