@@ -1,17 +1,13 @@
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-  <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   <HotelSafe />
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
 import HotelSafe from './components/HotelSafe.vue'
 
 export default {
   name: 'App',
   components: {
-    // HelloWorld
     HotelSafe 
   }
 }
