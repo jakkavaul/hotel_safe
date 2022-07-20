@@ -16,7 +16,7 @@ export default {
     }
   },
   methods: {
-    onClick: function () {
+    onClick() {
       this.$emit('safeButtonPressed', this.value);
     },
   },

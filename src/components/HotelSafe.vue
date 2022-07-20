@@ -9,7 +9,8 @@
           <SafeScreen ref="SafeScreen"/>
         </div>
         <div class="row light-row">
-          <SafeLight />
+          <LockIndicatorLight ref="LockIndicatorLight"/>
+          <!-- <LockIndicatorLight /> -->
         </div>
       </div>
     </div>
@@ -19,15 +20,15 @@
 <script>
 import NumPad from './NumPad.vue';
 import SafeScreen from './SafeScreen.vue';
-import SafeLight from './SafeLight.vue';
+import LockIndicatorLight from './LockIndicatorLight.vue';
 
 export default {
   name: "HotelSafe",
   components: {
     NumPad,
     SafeScreen,
-    SafeLight
-  },
+    LockIndicatorLight
+},
   data() {
     return {
       locked: false,
@@ -53,14 +54,14 @@ export default {
           if (this.locked) {
             if (this.enteredPin == this.actualPin) {
               this.locked = false;
-              console.log('unlocked!');
+              this.$refs.LockIndicatorLight.turnOn();
             } else {
               this.$refs.SafeScreen.update("INVALID");
             }
           } else {
             this.actualPin = this.enteredPin;
             this.locked = true;
-            console.log('pin changed!');
+            this.$refs.LockIndicatorLight.turnOff();
           } 
 
           this.enteredPin = "";
