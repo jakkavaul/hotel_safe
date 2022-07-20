@@ -1,5 +1,5 @@
 <template>
-  <div class="num-pad">
+  <div class="num-pad" id="num_pad">
     <SafeButton
       v-for="button in buttons"
       :value="button.value"
