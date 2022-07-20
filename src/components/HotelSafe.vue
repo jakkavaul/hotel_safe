@@ -2,15 +2,14 @@
   <div class="hotel-safe">
     <div class="safe-body">
       <div class="column">
-        <NumPad @safe-button-pressed="onSafeButtonPressed"/>
+        <NumPad @safe-button-pressed="onSafeButtonPressed" />
       </div>
       <div class="column">
         <div class="row screen-row">
-          <SafeScreen ref="SafeScreen"/>
+          <SafeScreen ref="SafeScreen" />
         </div>
         <div class="row light-row">
-          <LockIndicatorLight ref="LockIndicatorLight"/>
-          <!-- <LockIndicatorLight /> -->
+          <LockIndicatorLight ref="LockIndicatorLight" />
         </div>
       </div>
     </div>
@@ -28,44 +27,57 @@ export default {
     NumPad,
     SafeScreen,
     LockIndicatorLight
-},
+  },
   data() {
     return {
-      locked: false,
+      locked:     false,
       enteredPin: "",
-      actualPin: "",
+      actualPin:  "",
     }
   },
   methods: {
     onSafeButtonPressed: function (value) {
 
+      let screen  = this.$refs.SafeScreen;
+      let light   = this.$refs.LockIndicatorLight;
+
       if (value === 'clear') {
         this.enteredPin = "";
-        this.$refs.SafeScreen.update("");
+        screen.update("");
         return;
       }
 
       if (this.enteredPin.length < 4) {
+        if (!isNaN(value)) { // number keys only
           this.enteredPin += value;
-          this.$refs.SafeScreen.update(this.enteredPin);
-      } else {
-        if (value === 'enter') {
-          this.$refs.SafeScreen.update("");
+          screen.update(this.enteredPin);
+        }
+      } 
+
+      if (value === 'enter') {
+        if (this.enteredPin.length == 4) {
+          screen.update("");
           if (this.locked) {
-            if (this.enteredPin == this.actualPin) {
+            if (this.enteredPin === this.actualPin) {
               this.locked = false;
-              this.$refs.LockIndicatorLight.turnOn();
+              light.turnGreen();
             } else {
-              this.$refs.SafeScreen.update("INVALID");
+              screen.update("INVALID");
             }
           } else {
+            // set PIN and lock
             this.actualPin = this.enteredPin;
+            screen.update("PIN SET");
             this.locked = true;
-            this.$refs.LockIndicatorLight.turnOff();
-          } 
+            light.turnRed();
+          }
 
-          this.enteredPin = "";
+        } else {
+          screen.update("INVALID");
         }
+
+        setTimeout(() => screen.update(""), 500);
+        this.enteredPin = "";
       }
     },
   },
@@ -74,14 +86,13 @@ export default {
 
 <style scoped>
 .column {
-  float: left;
-  width: 50%;
+  float:  left;
+  width:  50%;
 }
 
 .row {
   height: 50%;
 }
-
 .screen-row {
   padding: 30px 0 00;
 }
